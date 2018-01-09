@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>天天打卡送好礼</title>
+  <meta name="keywords" content="&#x9879;&#x76EE;&#x5173;&#x952E;&#x8BCD;">
+  <meta name="description" content="&#x9879;&#x76EE;&#x63CF;&#x8FF0;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no" />
+  <script>
+    var sn = sn || {};
+  </script>
+    <link rel="stylesheet" href="https://sslres.suning.com/project/sign/sign/mobile/css/index.css?v=20171017010630">
+  <link rel="stylesheet" href="https://sslres.suning.com/project/sign/sign/mobile/css/signs-index.css?v=20171017010630">
+    <script>
+        var signsIndexPageConfig = {
+            isSigns: 0, // 0为未打卡，1为已打卡
+            signsDetailMoreGameDiamondAjaxHost: '//sign.suning.com/sign-web/', // 打卡数据、广告ajax、云钻余额查询 host 
+            vipUrl: 'https://vip.suning.com/m/toMyCloudDiamond.do', // 云钻余额跳转
+            historyUrl: '//sign.suning.com/sign-web/m/sign/showSignHistory.do', // 打卡共获得云钻链接
+            ruleUrl: '//sign.suning.com/sign-web/m/sign/showGameRuleDetail.htm', // 云钻规则跳转链接
+            projectImgHost: 'https://sslres.suning.com/project/sign/sign/mobile/images/', // 工程目录的host
+            advImgHost: '//image.suning.cn/uimg/' // 霸屏，banner广告，banner广告上面的4个按钮图片host
+        }
+        var signsIndexPageRedBag = {
+            finalDialogInfo: { // 红包活动最后一个弹窗信息
+                redPackageCouponPopupFlag: 0, // 最后结束弹窗是否弹起
+                dialogJumpUrl: 'http://quan.suning.com/yhqwap.do' // 最后一个弹窗跳转链接
+            },
+            pageIconUrl: '//sign.suning.com/sign-web/m/sign/ajax/redpackage/toQueryHistoryResult.do' // 页面上红包icon跳转链接
+        }
+    </script>
+</head>
+<body>
+    <script type="text/javascript" src="https://sslres.suning.com/project/sign/js/jquery.1.7.2.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/js/mobile/adapt.js?v=20171017010630"></script>
+	<div class="signs-index-page vip-wrapper wrapper-bottom">
+		<div class="signs-calendar-float-wrap signs-calendar-float-wrap-open "><!-- 未签到用  signs-calendar-float-wrap signs-calendar-float-wrap-open， 已签到用signs-calendar-float-wrap signs-calendar-float-wrap-signed -->
+ 			<div class="signs-line-wrap">
+				<!-- 打卡日历 [[ -->
+				<div class="signs-line ">
+						<h2 id="lineTitle" class="line-title">连续打卡<span class="red">7天</span>额外赠送18云钻，你还差<span class="red"><b>6</b>天</span>哦～</h2>
+					<div class="line-bg"></div>
+					<div class="signs-list">
+						<div class="lion-wrap  "><span class="sign-lion"></span></div>
+						<div class="line one"></div>
+						<ul class="sign-ul">
+								<li class="sign-item isSelected  ">11.09</li>
+								<li class="sign-item  isToday ">今日</li>
+								<li class="sign-item  ">明日</li>
+								<li class="sign-item  ">11.12</li>
+								<li class="sign-item  ">11.13</li>
+								<li class="sign-item  ">11.14</li>
+								<li class="sign-item  ">11.15</li>
+						</ul>
+						<span class="sign-award "></span>
+					</div>
+				</div>
+			    <!-- 打卡日历 ]] -->
+       		</div>
+       		 <!-- 签到面板 [[ -->
+		     <div class="turnplate">
+		        <!-- 礼品选项 [[ -->
+		        <ul class="tp-option">
+		                    <li class='cloud-diamond' data='1'><p>5</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='2'><p>6</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='3'><p>8</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='4'><p>2</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='5'><p>10</p><p>云钻</p></li>
+		                    <li class='fail' data='6'><p>谢谢参与</p></li>
+		                        <li class='character-num8' data='7'><p>幸福阳光抽纸</p></li>
+		                    <li class='cloud-diamond' data='8'><p>15</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='9'><p>30</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='10'><p>50</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='11'><p>3</p><p>云钻</p></li>
+		                    <li class='cloud-diamond' data='12'><p>100</p><p>云钻</p></li>
+		        </ul>
+		        <!-- sn-selected显示选中的选项 sn-selected-coord12有12个坐标coord1到coord12 1对应左上角 顺时针-->
+		        <div id="sn-selected"></div>
+		        <!-- 礼品选项 ]] -->
+		        <!-- 按钮置灰状态为添加tp-btn-disabled 触发事件handle为J-tp-btn-->
+		            <a href="javascript:void(0);" class="tp-btn" name="ydhylm_dk_da_an"></a>
+		        <!-- 打卡按钮已打卡不可点击 -->
+		        <div class="btn-disabled-wrapper"  style="display:none"  >
+		            <a href="javascript:void(0);" class="tp-btn-disabled"></a>
+		            <!-- 新改查看打卡记录 [[ -->
+		            <div class="scan-order-wap">
+		                <a href="//sign.suning.com/sign-web/m/sign/showSignHistory.do">查看打卡记录</a>
+		            </div>
+		            <!-- 新改查看打卡记录 ]] -->
+		        </div>       
+		    </div>
+		    <!-- 签到面板 ]] -->   
+		    <div class="signs-switch-btn"></div> 
+    	</div>
+    
+        <div class="signs-detail-wrap">
+            <div class="signs-loading-wrap"><div class="signs-loading"><div class="signs-loading-circle"></div></div>正在加载中...</div>
+        </div>
+        <div class="signs-more-game-wrap signs-more-game-wrap-loading">
+            <div class="signs-loading-wrap"><div class="signs-loading"><div class="signs-loading-circle"></div></div>正在加载中...</div>
+        </div>
+       
+           
+    <input type="hidden" id="hidGrap" value="false" />
+    
+	<!--逛店铺，领云钻-->
+    <div class="store">
+        <div class="store-top">
+            <div class="store-top-wrap">
+                <div class="store-logo"></div>
+                    <div class="store-status">
+	                        <div class="store-status-tip ing">
+                        		<i></i>
+	                        	<span>疯抢中...</span>
+	                        </div>
+                	</div>    
+                	<span class="more-store"> <a href="/sign-web/m/sign/toSupplierActivities.htm">更多</a></span>            	
+            </div>
+        </div>
+        
+        	<div class="store-list">
+            <ul>
+            	<li >
+                    <div class="store-one-wrap" >
+                        <div class="store-info">
+                            <ul>
+                                <li onclick='gotoShopDetail("70165684")'><img src="//image.suning.cn/uimg/cshop/logo/000000000070165684_60x60.jpg?v=20171017010630"></li>
+                                <li onclick='gotoShopDetail("70165684")'><span class="title">家装e站官方旗舰店</span></li>
+                                <li class="award-box" onclick='gotoShopDetail("70165684")'>
+	                                    <span class="zuan"><i></i>2云钻</span>
+	                                    <span class="juan" style="width:100%;display:block;"><i></i>20元优惠券</span>
+								</li>
+                                <li><a id="180022233652052118" href="javascript:void(0);" class="" supplierCode="70165684"></a></li>
+                            </ul>
+                        </div>
+                        <div class="store-bg" onclick='gotoShopDetail("70165684")'></div>
+                    </div>
+                    <img src="//image.suning.cn/uimg//sop/commodity/176427504630241809346830_x.jpg?v=20171017010630" width="100%" onclick='gotoShopDetail("70165684")'>
+                    <input id="custNum0" type="hidden" value="6213638782"/>
+                    <input id="activityType0" type="hidden" value="ACT105000010"/>
+                    <input id="activityCode0" type="hidden" value="180022233652052118"/>
+                    <input id="supplierCode0" type="hidden" value="70165684"/>
+                </li>
+            	<li >
+                    <div class="store-one-wrap" >
+                        <div class="store-info">
+                            <ul>
+                                <li onclick='gotoShopDetail("70154203")'><img src="//image.suning.cn/uimg/cshop/logo/000000000070154203_60x60.jpg?v=20171017010630"></li>
+                                <li onclick='gotoShopDetail("70154203")'><span class="title">Feiry官方旗舰店</span></li>
+                                <li class="award-box" onclick='gotoShopDetail("70154203")'>
+	                                    <span class="zuan"><i></i>2云钻</span>
+	                                    <span class="juan" style="width:100%;display:block;"><i></i>100元优惠券</span>
+								</li>
+                                <li><a id="180290192731553945" href="javascript:void(0);" class="" supplierCode="70154203"></a></li>
+                            </ul>
+                        </div>
+                        <div class="store-bg" onclick='gotoShopDetail("70154203")'></div>
+                    </div>
+                    <img src="//image.suning.cn/uimg//sop/commodity/174896971118409397144681_x.jpg?v=20171017010630" width="100%" onclick='gotoShopDetail("70154203")'>
+                    <input id="custNum1" type="hidden" value="6188429718"/>
+                    <input id="activityType1" type="hidden" value="ACT105000010"/>
+                    <input id="activityCode1" type="hidden" value="180290192731553945"/>
+                    <input id="supplierCode1" type="hidden" value="70154203"/>
+                </li>
+            	<li >
+                    <div class="store-one-wrap" >
+                        <div class="store-info">
+                            <ul>
+                                <li onclick='gotoShopDetail("30000051")'><img src="//image.suning.cn/uimg/cshop/logo/000000000030000051_60x60.jpg?v=20171017010630"></li>
+                                <li onclick='gotoShopDetail("30000051")'><span class="title">TCL空调官方旗舰店</span></li>
+                                <li class="award-box" onclick='gotoShopDetail("30000051")'>
+                  						<span class="zuan top"><i></i>2云钻</span>
+								</li>
+                                <li><a id="180111170353610931" href="javascript:void(0);" class="" supplierCode="30000051"></a></li>
+                            </ul>
+                        </div>
+                        <div class="store-bg" onclick='gotoShopDetail("30000051")'></div>
+                    </div>
+                    <img src="//image.suning.cn/uimg//sop/commodity/161184854810480634695842_x.jpg?v=20171017010630" width="100%" onclick='gotoShopDetail("30000051")'>
+                    <input id="custNum2" type="hidden" value="6201389263"/>
+                    <input id="activityType2" type="hidden" value="ACT105000010"/>
+                    <input id="activityCode2" type="hidden" value="180111170353610931"/>
+                    <input id="supplierCode2" type="hidden" value="30000051"/>
+                </li>
+            	<li >
+                    <div class="store-one-wrap" >
+                        <div class="store-info">
+                            <ul>
+                                <li onclick='gotoShopDetail("70137013")'><img src="//image.suning.cn/uimg/cshop/logo/000000000070137013_60x60.jpg?v=20171017010630"></li>
+                                <li onclick='gotoShopDetail("70137013")'><span class="title">奥多金官方旗舰店</span></li>
+                                <li class="award-box" onclick='gotoShopDetail("70137013")'>
+	                                    <span class="zuan"><i></i>2云钻</span>
+	                                    <span class="juan" style="width:100%;display:block;"><i></i>5元优惠券</span>
+								</li>
+                                <li><a id="180057393017684149" href="javascript:void(0);" class="" supplierCode="70137013"></a></li>
+                            </ul>
+                        </div>
+                        <div class="store-bg" onclick='gotoShopDetail("70137013")'></div>
+                    </div>
+                    <img src="//image.suning.cn/uimg//sop/commodity/158142150921167097024320_x.jpg?v=20171017010630" width="100%" onclick='gotoShopDetail("70137013")'>
+                    <input id="custNum3" type="hidden" value="6150103781"/>
+                    <input id="activityType3" type="hidden" value="ACT105000010"/>
+                    <input id="activityCode3" type="hidden" value="180057393017684149"/>
+                    <input id="supplierCode3" type="hidden" value="70137013"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="recommend-choose hide">
+        <div class="goods-hd">
+            <div class="goods-hd-title">为你精挑细选</div>
+        </div>
+        <ul class="recommend-choose-ul">
+        </ul>
+    </div>
+<link rel="stylesheet" href="https://sslres.suning.com/project/sign/css/calendar.css?v=20171017010630" />
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/js/artTemplate.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/js/vipNew.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/js/mobile/dialog.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/js/ECode.calendar.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/mvs/RES//common/script/android/sneapp.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/js/mobile/mobileUtil.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/sign/js/numberAnimate.js?v=20171017010630"></script>
+<script type="text/javascript" src="https://sslres.suning.com/project/sign/js/security/base64.js?v=20171017010630"></script>
+<style>
+    .error_msg{color:red;display:none;height:28px;line-height:28px;font-size:14px;}
+</style>
+
+<script type="text/template" id="errorSystemBusy">
+    <span class="error_system_busy error_msg">系统繁忙，容我三思...</span>
+</script>
+        
+        <script type="text/template" id="signDialog">
+           <div class="diamond01 new-diamond">
+            <div class="dl-wrap good-luck diamond-close-bigger" id="dialog041">
+                <div class="dialog-top">
+                	{{if prizeCatg!=0}}
+                    	<a href="javascript:doSignShare('//t.suning.cn/HvsIFx','https://sslres.suning.com/project/sign','{{sharePrize}}', '{{beatRatio}}');" class="dl-jump gl-new">分享</a>
+                    {{/if}}
+                    <span class="n-close"></span>
+                </div>
+                <div class="dialog-main mid" id='dialogMainImage'>
+                    <!--红色光加样式red,黄色光加样式yellow-->
+                    <div class="gl-star {{glStarStyle}}">
+                        <div class="bling">
+                            <span class="top"></span>
+                            <span class="bottom"></span>
+                            <span class="left top"></span>
+                            <span class="left bottom"></span>
+                            <span class="right top"></span>
+                            <span class="right bottom"></span>
+                        </div>
+                        <!--红包样式hongbao 券样式quan 礼包样式gift-->
+                        <div class="animate gl-diamond {{animateStyle}}"></div>
+                        <div class="light-wrap">
+                            <div class="animate light v"></div>
+                            <div class="animate light h"></div>
+                        </div>
+                    </div>
+                    {{if prizeCatg==0}}
+                    	<div class="dialog-main-nad min-top">
+                        <div class="logo img-min"></div>
+                        <div class="cy">谢谢参与！</div>
+	                    </div>
+	                    <div class="gl-desc">明天或许有好运气哦～</div>
+                    {{else}}
+                    	<h2 class="gl-title">恭喜你今日共获得</h2>
+	                    <b class="gl-content red">{{prizeText}}</b>
+	                    <div class="gl-desc s">
+	                          {{if prizeCatg==2}}红包券可至我的易购查看{{/if}}
+	                          {{if prizeCatg==3||prizeCatg==4}}
+	                    		<a class="gl-btn">去领奖</a>
+	                    	  {{/if}}
+	                    </div>
+	                    {{if typeof(beatRatio)!='undefined'}}
+	                    <div class="gl-desc">当前好运指数打败<span class="red">{{beatRatio}}%</span>的人<a href="javascript:doSignShare('//t.suning.cn/HvsIFx','https://sslres.suning.com/project/sign','{{sharePrize}}', '{{beatRatio}}');" class="gl-share">炫耀一下</a></div>
+	                    {{/if}}
+                    {{/if}}
+                    {{if prizeCatg!=0||!isMinos}}
+                    <ul class="gl-other">
+                    	{{each signResultItems}}
+							<li>·{{$value.tipLabel}}<span class="fr">{{$value.tipValue}}</span></li>
+			         	{{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                <div class="gl-splice"></div>
+                <div class="dialog-ad">
+                    <a href="http://cuxiao.m.suning.com/hwg25yd.html" class="gl-ad-wrap fl" name="ydhylm_dk_tk_1" ><img src="//image.suning.cn/uimg//scdc/exchange/151023846213072660.jpg" width="100%"></a>
+                    <a href="http://cuxiao.m.suning.com/channel/yzcjfz.html" class="gl-ad-wrap fr" name="ydhylm_dk_tk_2" ><img src="//image.suning.cn/uimg//scdc/exchange/150285052161273427.png" width="100%"></a>
+                </div>
+            </div>
+        </div>
+        </script>
+        
+     <script type="text/template" id="signDialog1">
+     <div class="dl-fail fd-special" >
+                <div class="fail-detail">
+                     {{include content data}}
+                </div>
+              <div class="dl-btn">
+                            <a href="javascript:void(0);" class="dl-close n-close">关闭</a>
+                            <a  href="javascript:goPageRouter('http://m.suning.com/index.html','1001');" class="dl-jump">去购物</a>
+                        </div>
+            </div>
+
+        </script>
+         <script type="text/template" id="signDialog4">
+         <div class="dl-fail fd-special" >
+                        <div class="fail-detail">
+                        {{include content data}}
+                        </div>
+                        <div class="fail-btn">
+                            <a href="javascript:void(0);" class="n-close">我知道了</a>
+                        </div>
+                    </div>
+                </div>
+        </script>
+    <script type="text/template" id="thanksDialog">
+           <div class="diamond01 new-diamond">
+		        <div class="dl-wrap" id="dialog10">
+		            <div class="dialog-top">
+		                <span class="n-close"></span>
+		            </div>
+		            <div class="dialog-main-nad">
+		                <div class="logo img-min"></div>
+		                <div class="cy">谢谢参与！</div>
+		                <div class="next pb">明天或许会有好运气</div>
+		            </div>
+		        </div>
+		    </div>
+    </script>
+
+     <script type="text/template" id="signDialog3">
+        <div class="dl-wrap">
+            <div class="dialog-top">
+                <span class="n-close"></span>
+            </div>
+            <div class="dialog-main-nad max-top">
+                {{include content data}}
+            </div>
+            <div class="dialog-btn">
+                <a href="" class="dl-jump dl-jump-long">去领奖</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="errorDialog">
+        <div class="dl-fail fd-special" id="dialog4">
+            <div class="fail-detail">
+                <p>网络异常，请稍后再试！</p>
+            </div>
+            <div class="fail-btn">
+                <a href="javascript:void(0)" class="n-close">我知道了</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="errorDialog2">
+        <div class="dl-fail fd-special" id="dialog5">
+            <div class="fail-detail">
+                <p>网络异常，请稍后再试吧！</p>
+            </div>
+            <div class="fail-btn">
+                <a href="javascript:void(0)" class="n-close">我知道了</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="graphicalContent">
+        <div class="dl-fail fd-special" >
+            <div class="fail-detail check-code">
+                <div class="fd-control">
+                    <label class="fd-label">验证码</label>
+                    <div class="fd-constrols">
+                        <input type="text" id="graphicalTxt" placeholder="&#x8BF7;&#x8F93;&#x5165;&#x56FE;&#x7247;&#x4E2D;&#x7684;&#x5B57;&#x7B26;">
+                    </div>
+                </div>
+                <div class="fd-control">
+                    <label class="fd-label"></label>
+                    <div class="fd-constrols">
+                       <img  id="graphicalImg" src="//vcs.suning.com/vcs/imageCode.htm?uuid=819d939f-bb00-49f2-bd91-8c061bc3a85a" >
+                    </div>
+                    <div class="fd-code-change"></div>
+                </div>
+            </div>
+            <div class="dl-btn">
+                <a href="javascript:doValidateVCSCode('819d939f-bb00-49f2-bd91-8c061bc3a85a','{{sourceTxt}}')" class="dl-jump dl-jump-long">确定</a>
+            </div>
+        </div> 
+    </script>
+    
+    <script type="text/template" id="upGrade">
+        <h2 class="upGrade-titile">V1会员才能打卡哦！</h2>
+        <p class="upGrade-birth">购买一件实付金额10元以上的实物商品，确认收货后可升级V1。</p>
+    </script>
+
+    <script type="text/template" id="diamondContent">
+        <h2 class="gl-title">恭喜你今日共获得</h2>
+        <b class="gl-content red">{{prizeText}}</b>
+        {{if prizeCatg==2}}
+        	<div class="gl-desc s">红包券可至我的易购查看</div>
+        {{/if}}
+        {{if prizeCatg==3||prizeCatg==4}}
+        	<a class="gl-btn">去领奖</a>
+        {{/if}}
+        {{if typeof(beatRatio)!='undefined'}}
+             <div class="gl-desc">当前好运指数打败<span class="red">{{beatRatio}}</span>的人
+             <a href="javascript:doSignShare('//t.suning.cn/HvsIFx','https://sslres.suning.com/project/sign','{{sharePrize}}', '{{beatRatio}}');" class="gl-share">炫耀一下</a></div>
+        {{/if}}
+        <ul class="gl-other">
+         {{each signResultItems}}
+				<li>·{{$value.tipLabel}}-------------{{$value.tipValue}} </li>
+         {{/each}}
+        </ul>
+    </script>
+
+    <script type="text/template" id="moreDiamondDialog">
+        <div class="continous-time">
+            <div class="mask mask-toggle"></div>
+            <div class="dialog-cnt">
+                <div class="diamond-bag scatter">
+                    <div class="diamond-one pulseDiamond">
+                        <div class="continous-days">
+                            <p>{{pageTip}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="extra-gift">
+                    <p>额外{{ruleOperator}}</p>
+                    <div class="numberRun"></div>
+                    <p class="bonus-shuffix"></p>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="familyContent">
+        <div class="{{imgClass}} img"></div>
+        <div class="cy">恭喜你今日打卡获得</div>
+        <div class="cont">{{prizeText}}</div>
+    </script>
+
+    <script type="text/template" id="couponContent">
+        <div class="img-juan"></div>
+        <div class="cy">恭喜你今日打卡获得</div>
+        <div class="cont">{{prizeText}}</div>
+        <p>可至我的优惠券查看</p>
+    </script>
+
+    <script type="text/template" id="oneMoreTime">
+        <p class="sdm-titile">{{prizeText}}</p>
+    </script>
+    
+    <script type="text/template" id="bindPhoneDialog">
+        <div class="dl-wrap">
+            <div class="dialog-main-phone">
+                <div class="">先绑定手机，才能每天打卡赢惊喜哦。</div>
+            </div>
+            <div class="dialog-btn phone-btn">
+                <span class="n-close">取消</span>
+                <a href="https://aq.suning.com/asc/wap/bvmobile/check_1.do?nextTargetUrl=http://sign.suning.com/sign-web/m/sign/welcome_1.do?rl=1">去绑定</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="newDiamondDlg">
+        <div class="dl-wrap">
+            <div class="dialog-top">
+                <span class="n-close"></span>
+            </div>
+            <div class="dialog-main-nad mm-top">
+                <div class="tip-img"></div>
+                <div class="tip">
+                    {{if isIOS8Upper}}
+                        开启后将机智的提醒你来<span>领云钻</span>
+                    {{else}}
+                        请在Iphone的“设置-通知-苏宁易购app”中允许接收通知
+                    {{/if}}
+                </div>
+            </div>
+            <div class="dialog-btn ngift-btn">
+                <a href="javascript:void(0)">
+                    {{if isIOS8Upper}}
+                        去开启
+                    {{else}}
+                        知道了
+                    {{/if}}
+                </a>
+            </div>
+        </div>
+    </script>
+    
+    
+    <script type="text/template" id="signDialog041_0">
+			 <div class="diamond01 new-diamond">
+             <div class="dl-wrap good-luck">
+             <div class="dialog-top">
+                    <a href="javascript:doSignShare('//t.suning.cn/HvsIFx','https://sslres.suning.com/project/sign','{{sharePrize}}', '{{beatRatio}}');" class="dl-jump gl-new">分享</a>
+                    <span class="n-close"></span>
+                </div>
+                <div class="dialog-main mid">
+                	<!--红色光加样式red,黄色光加样式yellow-->
+                    <div class="gl-star img">
+                        <div class="bling">
+                            <span class="top"></span>
+                            <span class="bottom"></span>
+                            <span class="left top"></span>
+                            <span class="left bottom"></span>
+                            <span class="right top"></span>
+                            <span class="right bottom"></span>
+                        </div>
+                        <!--红包样式hongbao 券样式quan 礼包样式gift-->
+                        <div class="animate gl-diamond"></div>
+                        <div class="light-wrap">
+                            <div class="animate light v"></div>
+                            <div class="animate light h"></div>
+                        </div>
+                    </div>
+                    <h2 class="gl-title">恭喜你今日共获得</h2>
+                    <b class="gl-content red">{{sumTip}}</b>
+                </div>
+                <div class="gl-splice"></div>
+                <div class="dialog-ad">
+                    <a href="http://cuxiao.m.suning.com/hwg25yd.html" class="gl-ad-wrap fl"><img src="//image.suning.cn/uimg//scdc/exchange/151023846213072660.jpg" width="100%"></a>
+                    <a href="http://cuxiao.m.suning.com/channel/yzcjfz.html" class="gl-ad-wrap fr"><img src="//image.suning.cn/uimg//scdc/exchange/150285052161273427.png" width="100%"></a>
+                </div>
+            </div>
+        	</div>
+        </script>
+    
+    
+    
+    <script type="text/javascript">
+        var Constant =$.extend(Constant?Constant:{}, {
+                resRoot : 'https://sslres.suning.com/project/sign',
+                resVersion : '20171017010630',
+                sign_base : '//sign.suning.com/sign-web',
+                tuijian_url: '//tuijian.suning.com',
+                uuid : '819d939f-bb00-49f2-bd91-8c061bc3a85a',
+                passport_auth_url : '',
+                passport_url : '',
+                vcsServerImgUrl : '//vcs.suning.com/vcs/imageCode.htm'
+            });
+    </script>
+    <script type="text/javascript" src="https://sslres.suning.com/project/sign/sign/mobile/js/dialogTemplate.js?v=20171017010630"></script>    <input type="hidden" value='0' id="minosRunExecResultId"/>
+    <script type="text/javascript">
+		if(navigator.userAgent.indexOf("SNEBUY-APP")!=-1){
+		    document.write("<input type='hidden' id='resourceType' value='inapp'/>");
+		}else{
+		    document.write("<input type='hidden' id='resourceType' value='wap'/>");
+		}
+	</script>
+    <script type="text/javascript" src="https://sslres.suning.com/project/sign/js/md.js?v=20171017010630"></script>
+    <script type="text/javascript" src="https://sslres.suning.com/project/sign/js/click.js?v=20171017010630"></script>
+    <script type="text/javascript">
+    $(function(){
+    	$("a[name^='ydhylm_dk_'],div[name^='ydhylm_dk_']").live("click",function(){
+            sa.click.sendDatasIndex(this);
+        });
+        $("a[name^='sign_none_recsigntj_'],div[name^='sign_none_recsigntj_']").live("click",function(){
+            sa.click.sendDatasIndex(this);
+        });
+    });
+    </script>
+
+    <script type="text/template" id="prdTpl">
+        <li>        
+            <a href="{{jumpUrl ? jumpUrl : 'javascript:;'}}" name="{{prdTplName}}" id="{{prdTplId}}">
+                <span class="prd-img">
+                    <img src2="{{picUrl}}">
+                </span>
+                <span class="prd-name">{{prodName}}</span>
+                <span class="sale-price">                   
+                    <span class="price"> {{ if gbPrice!=''}}<i>￥</i>{{/if}}{{gbPrice}}</span>                            
+                    {{ if salesNum!=0}}
+                    <span class="buying">{{salesNum}}人已购</span>
+                    {{/if}}
+                </span>
+                {{ if promotionInfo!=''}}<span class="discount">{{promotionInfo}}</span>{{/if}}                              
+            </a>
+        </li>
+    </script>
+    <script src="https://sslres.suning.com/project/sign/js/me.base.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/js/lazyelem.min.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/js/swiper.min.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/js/mobile/lotteryDraw.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/js/lazyload.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/js/mobile/json2.min.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/js/mobile/mobileUtil.js?v=20171017010630"></script>  
+    <script src="https://sslres.suning.com/project/sign/js/recommendClick.js?v=20171017010630"></script>
+    <script src="//sslres.suning.com/project/scdc/js/mobile/memberMobileUtiles.min.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/sign/mobile/js/signsIndex.min.js?v=20171017010630"></script>
+    <script src="https://sslres.suning.com/project/sign/sign/mobile/js/six-analysis.js?v=20171017010630"></script>
+    <script>
+        $(function(){
+            sixAnalysis({  // 六段流量埋点
+	          str: '10009-null-100025/null-' + document.title + '-null-null-null'
+	        });
+        })
+    </script>
+    <script type="text/javascript">
+        var passport_config = { 
+            base: "/sign-web/", 
+            loginTheme: "b2c_pop" 
+        };
+    </script>
+    <script type="text/javascript" src="//dt.suning.com/detect/dt/detect.js"></script>
+    <script type="text/javascript" src="https://passport.suning.com/ids/js/passport.js"></script>
+    <script>
+    
+        var passport_config = { 
+            base: "/sign-web/", 
+            loginTheme: "b2c_pop" 
+        };
+        var Constant =$.extend(Constant?Constant:{}, {
+                isCMFEmergencyFlag : false,
+                isMaintainBirthDay : false,
+                isOpenBirthWin : false,
+                isBind : true,
+                custLevel : 1,
+                signBeginTime : 0,
+                signEndTime : 235959,
+                signDateAcrossFlag : '0',
+                SignDateAcrossFlag_TODAY : 0,
+                SignDateAcrossFlag_NEXT_DAY : 1,
+                base:'/sign-web',
+                minosInitUrl : '//dt.suning.com/detect/dt/detect.json',
+                mUrl:'//m.suning.com',
+                newImageHostFront : '//image?.suning.cn/uimg/b2c/newcatentries/',
+                aqBaseHttps : 'https://aq.suning.com',
+                snDomain : 'sign.suning.com',
+                resRoot : 'https://sslres.suning.com/project/sign',
+                resVersion : '20171017010630',
+                shortUrlSignShare : '//t.suning.cn/HvsIFx',
+                lastMonth : '10',
+                passport_auth_url : '',
+                passport_url : '',
+                memberId : '6123797111',
+                isDetectEnabled : true
+            });
+    </script>
+    <script type="text/javascript" src="https://sslres.suning.com/project/sign/sign/mobile/js/mobileSign.js?v=20171017010630"></script>
+    <script type="text/javascript">
+	    $(function(){
+		    function showAppDownloadBanner() {
+		        if (navigator.userAgent.indexOf("SNEBUY-APP") == -1) {
+		        	$(".download-app-wrap").show();
+		        }
+	        }        
+	        showAppDownloadBanner();
+	        
+	        //获取店铺打卡状态
+	        var state = 1;
+       		if(state==1){//state==3今日没有店铺报名 || state==2 已结束
+				getMySignRecord();
+       		}
+       		if(state==2){
+       			$("div.store-list ul li").each(function(){
+       				//云钻和券置灰
+       				var $ul = $(this).find("div.store-info ul");
+       				var li2 = $ul.find("li:eq(2)");
+	            	li2.removeClass("top").addClass("get");
+	            	var li = $ul.find("li:eq(3)");
+	            	var $a = li.find("a");
+	            	$a.addClass("stroll").css({"border":"solid 1px #ffc001"});
+	            	$a.text("进店逛逛");
+	            	var supplierCode = $a.attr("supplierCode");
+	            	$a.attr('onclick',"gotoShopDetail('"+supplierCode+"')")
+	            });
+       		}      		
+       		
+       		//页面初始化小狮子位置
+        	computedDistance();
+	    });
+        
+       	function getMySignRecord(){
+       		var datas = [];
+       		var length = 4;
+       		for(var i=0;i<length;i++){
+       			var kcustNum = 'custNum'+i;
+       			var kactivityType = 'activityType'+i;
+       			var kactivityCode = 'activityCode'+i;
+       			var supplierCode = 'supplierCode'+i;
+       			var data = {
+       				custNum:$("#"+kcustNum).val(),
+       				activityType:$("#"+kactivityType).val(),
+       				activityCode:$("#"+kactivityCode).val(),
+       				supplierCode:$("#"+supplierCode).val()
+       			};
+       			datas.push(data);
+       		}
+       		var jsondata = JSON.stringify(datas);
+            $.ajaxSetup({  
+		        contentType : 'application/json'
+		    });  
+        	$.ajax({
+			   type: "POST",
+			   headers: { 
+			        'Accept': 'application/json',
+			        'Content-Type': 'application/json' 
+			    },
+			   url: "/sign-web/m/sign/queryTop4MySign.do",
+			   data: jsondata,
+			   dataType: "json",
+			   contentType:'application/json',
+			   traditional:true,
+			   success: function(dataMap){
+			       //var obj = JSON.parse(dataMap);
+			       var obj = dataMap;
+			       var state = 1;
+			       if(obj.flag){
+			       		var resultList = obj.resultList;
+			       		for(var i=0;i<resultList.length;i++){
+			       			var acode = resultList[i].activityCode;//活动编码
+			       			var ptimes = resultList[i].participateTimes;//参与次数
+			       			var scode = resultList[i].supplierCode;//商户编码
+			       			var text = "";
+			       			var css = "";
+			       			var $a = $("#"+acode);
+			       			if(ptimes>0){//已领取
+			       				text = '已领取';
+			       				css = 'get';
+			       				$a.closest('.store-info').find('.award-box').addClass('get');
+			       			}else{
+			       				text = '去领取';
+			       				css = 'go';
+			       				//针对已领取的点击处理
+			       				var supplierCode = $a.attr("supplierCode");
+	            	            $a.attr('onclick',"gotoShopDetail('"+supplierCode+"')")
+			       			}
+			       			$a.text(text);
+			       			$a.addClass(css);
+			       		}
+			       }
+			   },
+			   error:function(msg){
+			   		
+			   }
+			});
+       	}
+       	
+       	function gotoShopDetail(shopId){
+       	    var url = "//shop.m.suning.com/" + shopId +".html";
+       		goPageRouterShop('1115', shopId,url); 
+       	}
+       	
+       	function gotoProductDetailPage(proCode,vendorCode,url){
+       	    goProductDetailPageRouter(proCode,vendorCode,url)
+       	}
+       	
+        //计算打卡小狮子动画距离
+        function c(){
+            var $l=$('.lion-wrap'),$line=$('.line'),l=0,w = 0,$d,i=0,second=2000;
+            $('.sign-item').each(function(_i,_) {
+                if(!$(_).hasClass('isSelected')){ 
+                    $d = $(_);
+                    i=_i;
+                    return false;
+                }
+            })
+            l = $d.offset().left+$d.width()/2+parseInt($l.css('left'))-$l.width()/2-$l.offset().left;
+            $l.css('left',l.toFixed(1)+'px');
+            w = i==0?$d.width()/2:$line.width()+$d.width();
+            $line.css('width',w); 
+            if(i == 6)
+                setTimeout(function() {
+                    $('.sign-award').remove();
+                    $l.addClass('end');
+                    $line.css('width','100%');
+                    $('.signs-line').addClass('end');
+                    $('#lineTitle').html('你已连续打卡7天，额外获得<span class="red"><b>18云钻</b></span>～')
+                },1500),second=4000;
+             else {
+                var $b=$("#lineTitle").find('b');
+                $b.text(parseInt($b.text())-1);
+            }
+            setTimeout(function() {
+                $('.sign-lion').removeClass('move');
+            },second);
+        }
+        
+        
+         //计算初始化小狮子位置（根据当前已打卡日期位置计算小狮子相对位置）
+        function computedDistance(){
+            var list = $('.sign-item.isSelected'),
+            $l = $('.lion-wrap'), l,
+            $last = $(list[list.length-1]);
+            if($last.length){
+            	l = $last.offset().left + $last.width()/2+parseInt($l.css('left'))-$l.width()/2-$l.offset().left;
+            }
+            $l.css('left', l.toFixed(1)+'px')
+        }
+       	
+       	
+       	 setTimeout(function() {
+            getTips();
+        }, 3500)
+
+ 		//实时获取弹幕提示
+        function getTips() {
+            // body...
+            $.getJSON(Constant.base+"/m/sign/ajax/list/winner.do", function(data) {
+            	 var res=[];
+            	 if(null==data){
+            	 	return;
+            	 }
+            	 for(var i=0;i<data.length;i++){
+		             var winner = data[i];
+		             var prizeQty = getDefaultIfNull(winner.prizeQty);
+		             var prizeName = getDefaultIfNull(winner.prizeName);
+		             var prizeCatg = getDefaultIfNull(winner.prizeCatg);
+		             if(prizeCatg == 1){
+		                  prizeName = prizeQty + prizeName;
+		             }else if(winner.prizeCatg == 3 && winner.prizeQty > 1){
+		                  prizeName = prizeName+"&times;"+prizeQty;
+		             }
+		             var headerPic = getDefaultIfNull(winner.smallHeadPic);
+		             var nickName = getDefaultIfNull(winner.nickName);
+		             var nickName = nickName.length > 11 ? nickName.substring(0, 6) + "..." : nickName;
+		             var info = "获得了"+prizeName;
+		             var row = {};
+					 row.headerPic = headerPic;
+					 row.nickName = nickName;
+					 row.info = info;
+				     res.push(row);		
+		          }
+                if (res.length>0){
+                    res = JSON.stringify(res);
+                    res = JSON.parse(res);
+                    var i = 0,$n = $('<div class="notice fadeInUp"></div>');
+                    $n.html(template('medalTipTemp', res[i]));
+                    $('.turnplate').append($n);
+                    setInterval(function() {
+                        if ($('.notice').hasClass('fadeInUp')) {
+                            $('.notice').toggleClass('fadeInUp fadeOutUp');
+                        } else{
+                            i++;
+                            if(i >= res.length) i=0;
+                            $('.notice').html(template('medalTipTemp', res[i])).toggleClass('fadeInUp fadeOutUp');
+                        }
+                    }, 3000);
+                }
+            });
+        }
+        
+        function getDefaultIfNull(data){
+        	if(typeof(data)=='undefined'||data==null||data==""){
+        		return "";
+        	}else{
+        		return data;
+        	}
+        }        
+    </script>
+    <script type="text/html" id="medalTipTemp">
+        <img class="avatar" src="{{headerPic}}" />
+            <p class="mes-scroll ell"><span class="nick-name ell">{{nickName}}</span>{{info}}</p>
+    </script>
+</body>
+</html>
