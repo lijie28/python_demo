@@ -10,7 +10,7 @@ sys.setdefaultencoding( "utf-8" )
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL'
 hea = {'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'} 
-homepage_url = "https://sign.suning.com/m/sign/welcome.do"
+homepage_url = "https://www.baidu.com/s?wd=天杀的"
 local_cookies = r'cookies.txt'
 def getHomepage(url,cookie_jar):
     # cookiePath = 'cookies.txt'
