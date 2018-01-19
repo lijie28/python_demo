@@ -25,6 +25,7 @@ def getstr(imagepath):
 	
 	image = Image.open(imagepath)
 	code = pytesseract.image_to_string(image,lang='chi_sim')
+	print code
 	# res = re.search(r'^[0-9]+\..*\n', code)
 
 	# 将正则表达式编译成Pattern对象
@@ -55,15 +56,15 @@ def getstr(imagepath):
 
 
 
-ans = getstr('testt/12.png')
+ans = getstr('testt/16.jpg')
 if ans :
 	print '\n','抓取结果：\n',ans,'\n'
 	urlstr = furl+ans
 
 	# urlstr = 'https://www.baidu.com/s?wd=%s'% ans
-	print 'url:',urlstr,(urlstr.encode('utf8'),)
+	# print 'url:',urlstr,(urlstr.encode('utf8'))
 
-	openurl(urlstr)
+	# openurl(urlstr)
 	# openurl(urlstr)
 else:
 	print '\n','抓取结果：\n','无匹配结果','\n'
