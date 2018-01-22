@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 
 
 img_name='testt/13.jpg'
-image=io.imread(img_name,as_grey=False)
-# image = img_as_float(image)
+image=io.imread(img_name,as_grey=True)
+image = img_as_float(image)
 # image = img_as_float(data.moon())
 
 def hv(img_data,k):
@@ -29,7 +29,7 @@ def hs(img_data,k):
 
 def hr(img_data):
 	#更改对比度范围，让颜色变得更加鲜亮
- 	gam= exposure.rescale_intensity(img_data,in_range=(0.5,0.55))
+ 	gam= exposure.rescale_intensity(img_data,in_range=(0.25,0.55))
  	# gam= exposure.rescale_intensity(img_data,0.4)
  	return gam
 
@@ -43,17 +43,17 @@ def plt_show(img_data):
 
 
 def save_imgdata(img_data):
-	io.imsave('testt/testsave.jpeg',img_data)
+	io.imsave('testt/testsave.jpg',img_data)
 
 	# img_data.save('test.jpg')
-# imgdata = hc(hs(hv(image,30.0),0.01),0.9)
+# imgdata = hc(hs(hv(image,4),0.3),1.1)
 
-# imgdata = hc(image,0.9)
+# imgdata = hr(image)
 
-# imgdata = hs(hv(image,15.0),0.01)
+imgdata = hs(hv(image,9),0.1)
 
-plt_show(imgdata)
-# save_imgdata(imgdata)
+# plt_show(imgdata)
+save_imgdata(imgdata)
 
 
 
