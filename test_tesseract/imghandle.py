@@ -51,7 +51,9 @@ def handle(img_path):
 	image=io.imread(img_path,as_grey=False)
 	image = img_as_float(image)
 	imgdata = hs(hv(image,9),0.1)
-	save_imgdata(img_path,imgdata)
+	# save_imgdata(img_path,imgdata)
+	io.imsave(img_path,imgdata)
+	print 'over'
 	return img_path
 
 

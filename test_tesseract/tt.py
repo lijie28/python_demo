@@ -53,25 +53,3 @@ def getstr(imagepath):
 		return None
 
 
-
-# ans = getstr(handle('testt/13.jpg'))
-# if ans :
-# 	print '\n','抓取结果：\n',ans,'\n'
-
-# 	urlp = urlencode({'wd':ans})
-# 	# print 
-# 	# urlstr = furl+urlencode(ans)
-
-# 	urlstr = 'http://www.baidu.com/s?%s'% urlp
-
-# 	page = urllib2.urlopen(urlstr).read()
-# 	page = unicode(page, "utf-8")
-
-# 	print 'urlstr:',urlstr
-# 	# print '\n',page
-# 	print '出现了', page.count("孝"),'次'
-# 	# openurl(urlstr)
-# 	# openurl(urlstr)
-# else:
-# 	print '\n','抓取结果：\n','无匹配结果','\n'
-
