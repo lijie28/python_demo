@@ -5,10 +5,7 @@ from skimage import data, exposure, img_as_float, io, img_as_ubyte
 import matplotlib.pyplot as plt
 
 
-img_name='testt/13.jpg'
-image=io.imread(img_name,as_grey=True)
-image = img_as_float(image)
-# image = img_as_float(data.moon())
+# 
 
 def hv(img_data,k):
 	#调整曝光度 handel_visibility
@@ -42,18 +39,28 @@ def plt_show(img_data):
 	plt.show()
 
 
-def save_imgdata(img_data):
-	io.imsave('testt/testsave.jpg',img_data)
+def save_imgdata(img_data,img_path):
+	io.imsave(img_path,img_data)
 
 	# img_data.save('test.jpg')
 # imgdata = hc(hs(hv(image,4),0.3),1.1)
 
 # imgdata = hr(image)
 
-imgdata = hs(hv(image,9),0.1)
+def handle(img_path):
+	image=io.imread(img_path,as_grey=False)
+	image = img_as_float(image)
+	imgdata = hs(hv(image,9),0.1)
+	save_imgdata(img_path,imgdata)
+	return img_path
 
+
+
+# img_path='testt/13.jpg'
+# img = handle(img_path)
+# save_imgdata(img,'testt/hah.jpg')
 # plt_show(imgdata)
-save_imgdata(imgdata)
+# save_imgdata(imgdata)
 
 
 
@@ -66,29 +73,3 @@ save_imgdata(imgdata)
 
 
 
-
-
-# from skimage import io,data,color
-# import matplotlib.pyplot as plt
-# from skimage.morphology import disk
-# import skimage.filters.rank as sfr
-
-
-# img_name='testt/13.jpg'
-# img=io.imread(img_name,as_grey=False)
-# img=color.rgb2gray(img)
-# auto =sfr.enhance_contrast(img, disk(5))
-# plt.figure('filters') 
-# plt.subplot(121)
-# plt.imshow(img,plt.cm.gray) 
-# plt.subplot(122) 
-# plt.imshow(auto,plt.cm.gray)
-# plt.show()
-
-
-
-# img_name='testt/15.jpg'
-# img=io.imread(img_name,as_grey=False)
-# img_gray=color.rgb2gray(img)
-# io.imshow(img_gray)
-# io.show()

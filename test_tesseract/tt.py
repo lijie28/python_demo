@@ -6,6 +6,8 @@ from PIL import Image
 import re
 import webbrowser
 from urllib import urlencode
+import urllib2
+from imghandle import handle 
 
 sys.path.append("libs")
 reload(sys)   
@@ -15,11 +17,7 @@ sys.setdefaultencoding('utf8')
 furl = 'https://www.baidu.com/s?wd='
 
 def openurl(url):
-	# url = 'https://www.baidu.com/s?wd=7%E2%80%B2%E6%B8%85%E6%9C%9D%E9%A1%BA%E6%B4%BD%E5%91%88%E5%B8%9D%E7%9A%84%E7%94%9F%E6%AF%8D%E6%98%AF%3F'
-
-	# webbrowser.encode('gbk').open_new(url)
 	webbrowser.open(url)
-	# print webbrowser.get()
 
 
 def getstr(imagepath):
@@ -27,8 +25,6 @@ def getstr(imagepath):
 	image = Image.open(imagepath)
 	code = pytesseract.image_to_string(image,lang='chi_sim')
 	print code
-
-
 
 	# print arr
 	# res = re.search(r'^[0-9]+\..*\n', code)
@@ -56,34 +52,26 @@ def getstr(imagepath):
 		# print '\n','抓取结果：\n','无匹配结果','\n'
 		return None
 
-# s="中文" 
-# def isUnicoded(s):
-	
-# 	if isinstance(s, unicode): 
-# 	#s=u"中文" 
-# 		print '1' 
-# 		return s.encode('gbk') 
-# 	else: 
-# 	#s="中文" 
-# 		print '2'
-# 		return s.decode('utf-8').encode('gb2312')
 
 
+# ans = getstr(handle('testt/13.jpg'))
+# if ans :
+# 	print '\n','抓取结果：\n',ans,'\n'
 
-ans = getstr('testt/16.jpg')
-if ans :
-	print '\n','抓取结果：\n',ans,'\n'
+# 	urlp = urlencode({'wd':ans})
+# 	# print 
+# 	# urlstr = furl+urlencode(ans)
 
-	urlp = urlencode({'wd':ans})
-	# print 
-	# urlstr = furl+urlencode(ans)
+# 	urlstr = 'http://www.baidu.com/s?%s'% urlp
 
-	urlstr = 'https://www.baidu.com/s?%s'% urlp
-	# print 'url:',urlstr
+# 	page = urllib2.urlopen(urlstr).read()
+# 	page = unicode(page, "utf-8")
 
-
-	openurl(urlstr)
-	# openurl(urlstr)
-else:
-	print '\n','抓取结果：\n','无匹配结果','\n'
+# 	print 'urlstr:',urlstr
+# 	# print '\n',page
+# 	print '出现了', page.count("孝"),'次'
+# 	# openurl(urlstr)
+# 	# openurl(urlstr)
+# else:
+# 	print '\n','抓取结果：\n','无匹配结果','\n'
 
