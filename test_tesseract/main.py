@@ -16,8 +16,17 @@ time = time.strftime('%Y%m%d%H%M%S',time.localtime(time.time()))
 path = folder + '/' +time + imgtype
 print path
 
-screenshot(handle,path)
 
+
+def deal(path):
+    print 'deal begin'
+    handle(path)
+    reconize(path)
+    print 'deal over'
+
+
+
+screenshot(deal,path)
 
 def test(outfunc,b,path):
 	print 'her'

@@ -53,11 +53,21 @@ def handle(img_path):
 	imgdata = hs(hv(image,9),0.1)
 	# save_imgdata(img_path,imgdata)
 	io.imsave(img_path,imgdata)
-	print 'over'
+	print 'handle over'
 	return img_path
 
 
+def decohandle(func):
+	def _decohandle(path):
+		handle(path)
+		func(path)
+	return _decohandle
 
+if __name__ == '__main__':
+	# handle('testt/llj.jpg')
+	print 'test'
+
+    
 # img_path='testt/13.jpg'
 # img = handle(img_path)
 # save_imgdata(img,'testt/hah.jpg')

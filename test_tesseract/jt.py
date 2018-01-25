@@ -54,7 +54,6 @@ def key(event,outf,path):
     # return funct(path)/
     # funct(path)
     # print "pressed",ima
-
 def keyAdaptor(fun,outf,path, **kwds):  
     '''''事件处理函数的适配器，相当于中介，那个event是从那里来的呢，我也纳闷，这也许就是python的伟大之处吧'''  
     return lambda event,fun=fun,outf=outf,path = path,kwds =kwds : fun(event,outf,path,**kwds)  
