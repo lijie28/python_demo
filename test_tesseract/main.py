@@ -28,41 +28,5 @@ def deal(path):
 
 screenshot(deal,path)
 
-def test(outfunc,b,path):
-	print 'her'
-	print b ,path
-	return outfunc(path)
-
-def test2(path):
-	print 'outfunc is to do :',path
-
-# a = lambda x,y : x+y
-
-# a = test(3)
-
-def testAdaptor(func, outfunc, **kwds):
-	print 'testAdaptor'
-	# return func(outfunc,**kwds)
-	return lambda fun, outfunc=outfunc : fun(outfunc,**kwds)
 
 
-
-
-# a = testAdaptor(test,test2,b='path is :',path='test/')
-
-# print a('1')
-
-
-# def funcA( kws):
-# 	print kws,'a'
-
-# def funcB(kws,func):
-# 	s = kws + 'b'
-# 	print s
-# 	return funcA(s)
-# 	# func(s)
-
-# funcB ('ans:',funcA)
-
-# handle(path)
-# reconize(path)

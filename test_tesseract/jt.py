@@ -10,23 +10,36 @@ x, y = 0, 0
 # lx,ly = 0, 0
 new_x,new_y= 0,0
 root = Tkinter.Tk()
-root.overrideredirect(True)
-#root.attributes("-alpha", 0.3)窗口透明度70 %
-root.attributes("-alpha", 0.2)#窗口透明度60 %
-root.geometry("300x200+0+0")
-canvas = Tkinter.Canvas(root)
-canvas.configure(width = 300)
-canvas.configure(height = 200)
-# canvas.configure(bg = "blue")
-canvas.configure(borderwidth = 30)
-# canvas.configure(highlightthickness = 3)
-canvas.pack()
+
+def screenshot(outf,path):
+
+    root.overrideredirect(True)
+    #root.attributes("-alpha", 0.3)窗口透明度70 %
+    root.attributes("-alpha", 0.1)#窗口透明度60 %
+    root.geometry("400x400+0+0")
+
+    canvas = Tkinter.Canvas(root)
+    canvas.configure(width = 400)
+    canvas.configure(height = 400)
+    # canvas.configure(bg = "blue")
+    # canvas.configure(borderwidth = 300)
+    # canvas.configure(highlightthickness = 3)
+    canvas.pack()
+
+    # global img_path 
+    # img_path = path
+    # print '看看：',keyAdaptor(key, path = ipath)
+    canvas.bind("<B1-Motion>",move)
+    canvas.bind("<Button-1>",button_1)
+    canvas.bind("<Double-Button-1>",keyAdaptor(key,outf,path = path))
+
+    root.mainloop()
 
 def move(event):
     global x,y,new_x,new_y
     new_x = (event.x-x)+root.winfo_x()
     new_y = (event.y-y)+root.winfo_y()
-    s = "300x200+" + str(new_x)+"+" + str(new_y)
+    s = "400x400+" + str(new_x)+"+" + str(new_y)
     root.geometry(s)
     # lx = new_x
     # ly = new_y
@@ -46,8 +59,8 @@ def button_1(event):
 	# ima.save('addr.jpeg','jpeg')
     
 def key(event,outf,path):
-    global new_x,new_y,img_path
-    ima = ImageGrab.grab((new_x,new_y,600,400))
+    global new_x,new_y
+    ima = ImageGrab.grab((new_x,new_y,new_x+400,new_y+400))
     ima.save(path,'jpeg')
     outf(path)
     print 'save success'
@@ -59,14 +72,4 @@ def keyAdaptor(fun,outf,path, **kwds):
     return lambda event,fun=fun,outf=outf,path = path,kwds =kwds : fun(event,outf,path,**kwds)  
     # return key(**kwds)
 
-def screenshot(outf,path):
-	
 
-	# global img_path 
-	# img_path = path
-    # print '看看：',keyAdaptor(key, path = ipath)
-    canvas.bind("<B1-Motion>",move)
-    canvas.bind("<Button-1>",button_1)
-    canvas.bind("<Double-Button-1>",keyAdaptor(key,outf,path = path))
-
-    root.mainloop()
