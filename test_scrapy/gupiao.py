@@ -13,30 +13,26 @@ hea = {'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) Apple
 gpulr = "http://guba.sina.com.cn/?s=bar&name=sz000725"
 # local_cookies = r'cookies.txt'
 
-
-def getHomepage(url,cookie_jar):
+def getDetail(url,cookie_jar=None):
     # cookiePath = 'cookies.txt'
-    f=open(cookie_jar,'r') 
-    cookies={} 
-    for line in f.read().split(';'): 
-        #其设置为1就会把字符串拆分成2份 
-        name,value=line.strip().split('=',1) 
-        cookies[name]=value
-    res = requests.get(url,headers = hea,cookies=cookies,allow_redirects=False)
+    # f=open(cookie_jar,'r') 
+    # cookies={} 
+    # for line in f.read().split(';'): 
+    #     #其设置为1就会把字符串拆分成2份 
+    #     name,value=line.strip().split('=',1) 
+    #     cookies[name]=value
+    res = requests.get(url,headers = hea,allow_redirects=False)
     if res.status_code == 302:
         location_url = res.headers['Location']
         print '页面重定向，可能是没登陆或token错误，可跳转到\n %s' % location_url
-        getHomepage(location_url,local_cookies)
+        getDetail(location_url,local_cookies)
     elif res.status_code == 200:
         
         print '头信息:\n%s \n 内容:\n%s' %(res.headers,res.text)
 
 
-def getRsaPwd():
-    public_key = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQComqoAyvbCqO1EGsADwfNTWFQIUbm8CLdeb9TgjGLcz95mAo204SqTYdSEUxFsOnPfROOTxhkhfjbRxBV4/xjS06Y+kkUdiMGFtABIxRQHQIh0LrVvEZQs4NrixxcPI+b1bpE0gO/GAFSNWm9ejhZGj7UnqiHphnSJAVQNz2lgowIDAQAB'
-    return
 
 
 if __name__ == '__main__':
     # main()
-    getHomepage(homepage_url,local_cookies)
+    getDetail(gpulr)
